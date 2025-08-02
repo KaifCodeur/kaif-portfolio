@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shaik Mohammed Kaif | Portfolio</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      color: #1a1a1a;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #004080;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.1em;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .lang-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .lang-toggle button {
+      background: white;
+      color: #004080;
+      border: 2px solid #004080;
+      border-radius: 5px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    nav {
+      margin-top: 30px;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-block;
+      padding: 5px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .section {
+      padding: 50px 15px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .section h2 {
+      color: #004080;
+      margin-bottom: 20px;
+      font-size: 1.8em;
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #004080;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 20px;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #002d59;
+    }
+
+    .project {
+      margin-bottom: 50px;
+    }
+
+    .project h3 {
+      margin-bottom: 5px;
+      color: #222;
+    }
+
+    .project p {
+      margin: 5px 0 10px;
+    }
+
+    .project a {
+      color: #004080;
+      text-decoration: none;
+      margin-right: 15px;
+    }
+
+    .project img {
+      margin-top: 10px;
+      max-width: 100%;
+      width: 90%;
+      height: auto;
+      border-radius: 6px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .skills-list {
+      list-style-type: square;
+      padding-left: 20px;
+      line-height: 1.8;
+    }
+
+    .contact-links a {
+      color: #004080;
+      text-decoration: none;
+      margin-right: 20px;
+      font-weight: 500;
+    }
+
+    .contact-links a:hover {
+      text-decoration: underline;
+    }
+
+    form input, form textarea {
+      font-family: inherit;
+    }
+
+    footer {
+      background-color: #f2f2f2;
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 40px;
+      font-size: 0.95em;
+      color: #333;
+    }
+
+    @media screen and (max-width: 768px) {
+      header h1 {
+        font-size: 2em;
+      }
+
+      header p {
+        font-size: 1em;
+      }
+
+      nav a {
+        display: block;
+        margin: 10px 0;
+      }
+
+      .section {
+        padding: 40px 10px;
+      }
+
+      .project img {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="lang-toggle">
+  <button onclick="toggleLang()">TR / EN</button>
+</div>
+
+<header>
+  <h1>Shaik Mohammed Kaif</h1>
+  <p>AI/ML Enthusiast | Full Stack Developer | Problem Solver</p>
+  <nav>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+    <a href="resume_kaif.pdf" class="btn" download>Download Resume</a>
+  </nav>
+</header>
+
+<section class="section lang-section" id="about-en">
+  <h2>About Me</h2>
+  <p>
+    I’m a recent graduate with a strong focus in Artificial Intelligence, Machine Learning,
+    and Full Stack Development. As a quick learner and self-driven problem solver, I believe in
+    building projects that matter and refining them with precision and speed.
+  </p>
+</section>
+
+<section class="section lang-section" id="about-tr" style="display: none;">
+  <h2>Hakkımda</h2>
+  <p>
+    Yapay Zeka, Makine Öğrenimi ve Full Stack Geliştirme alanlarında güçlü bir odaklanma ile yeni mezun oldum.
+    Hızlı öğrenen, kendi kendine motive olan bir problem çözücü olarak, anlamlı projeler üretmeye ve bunları titizlikle ve hızla geliştirmeye inanıyorum.
+  </p>
+</section>
+
+<section class="section" id="projects">
+  <h2>Projects</h2>
+
+  <div class="project">
+    <h3>Cryptocurrency Market Prediction App</h3>
+    <p>Deep learning-based crypto prediction using RNN, LSTM, and sentiment analysis.</p>
+    <a href="https://cryptocurrency-prediction-1777.streamlit.app/" target="_blank">Live Demo</a>
+    <a href="https://github.com/KaifCodeur" target="_blank">GitHub</a>
+    <img src="images/crypto-prediction.png" alt="Crypto Prediction Screenshot" />
+  </div>
+
+  <div class="project">
+    <h3>Online Shopping Mart</h3>
+    <p>Responsive e-commerce website built using React, JavaScript, HTML/CSS.</p>
+    <a href="https://kaifcodeur.github.io/frontend-project/" target="_blank">Live Demo</a>
+    <img src="images/shopping-mart.png" alt="Shopping Mart Screenshot" />
+  </div>
+
+  <div class="project">
+    <h3>Gesture-Controlled Presentation Tool</h3>
+    <p>Hand gesture-based slide navigation using OpenCV and Python.</p>
+    <a href="https://github.com/KaifCodeur/IMPLEMENTATION-OF-GESTURE-CONTROL-IN-POWER-POINT-PRESENTATION" target="_blank">GitHub</a>
+    <img src="images/gesture-presentation.png" alt="Gesture Tool Screenshot" />
+  </div>
+
+  <div class="project">
+    <h3>Unified Government Schemes Portal</h3>
+    <p>Centralized portal for accessing Indian government schemes.</p>
+    <a href="https://github.com/KaifCodeur/Unified-Government-Schemes-Portal" target="_blank">GitHub</a>
+    <img src="images/govt-portal.png" alt="Government Portal Screenshot" />
+  </div>
+</section>
+
+<section class="section" id="skills">
+  <h2>Skills & Technologies</h2>
+  <ul class="skills-list">
+    <li><strong>Languages:</strong> Python, JavaScript, SQL</li>
+    <li><strong>Web Development:</strong> HTML, CSS, React JS, Django</li>
+    <li><strong>AI/ML & Data Science:</strong> Linear Regression, Decision Trees, SVM, RNN, LSTM, TensorFlow, Keras, Scikit-learn, OpenCV</li>
+    <li><strong>Visualization:</strong> Pandas, NumPy, Power BI, Tableau</li>
+    <li><strong>Tools & Platforms:</strong> Git, GitHub, Streamlit</li>
+    <li><strong>Languages Spoken:</strong> English, Hindi, Telugu</li>
+  </ul>
+</section>
+
+<section class="section" id="contact">
+  <h2>Contact</h2>
+  <form action="https://formspree.io/f/xdkdlezn" method="POST" style="max-width: 600px; margin: auto;">
+    <input type="hidden" name="_redirect" value="thank-you.html">
+    <label for="name">Name:</label><br />
+    <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; margin-bottom: 10px;" />
+
+    <label for="email">Email:</label><br />
+    <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; margin-bottom: 10px;" />
+
+    <label for="message">Message:</label><br />
+    <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 10px; margin-bottom: 10px;"></textarea>
+
+    <button type="submit" style="background-color: #004080; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Send</button>
+  </form>
+
+  <p style="text-align:center; margin-top: 20px;">
+    Or reach out via:
+    <a href="mailto:personal.kaif7@gmail.com">Email</a> |
+    <a href="https://www.linkedin.com/in/kaifshaikMD" target="_blank">LinkedIn</a> |
+    <a href="https://github.com/KaifCodeur" target="_blank">GitHub</a>
+  </p>
+</section>
+
+<footer>
+  <h3>Hobbies & Interests</h3>
+  <p>
+    Enjoy creative pursuits like video editing and storytelling through anime.
+    Passionate about fitness and personal discipline through regular home workouts.
+    Curious about new technologies and continuously experimenting with UI, tools, and design.
+  </p>
+</footer>
+
+<script>
+  function toggleLang() {
+    const en = document.getElementById("about-en");
+    const tr = document.getElementById("about-tr");
+    en.style.display = en.style.display === "none" ? "block" : "none";
+    tr.style.display = tr.style.display === "none" ? "block" : "none";
+  }
+</script>
+
+</body>
+</html>
