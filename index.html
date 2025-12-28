@@ -6,729 +6,706 @@
   <title>Shaik Mohammed Kaif | Portfolio</title>
   <style>
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Times New Roman', Times, serif;
-      background: #525252;
-      scroll-behavior: smooth;
-      background-image: 
-        linear-gradient(rgba(82, 82, 82, 0.9), rgba(82, 82, 82, 0.9)),
-        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,.03) 2px, rgba(255,255,255,.03) 4px),
-        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,.03) 2px, rgba(255,255,255,.03) 4px);
-      color: #2d3748;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      position: relative;
+    :root {
+      --bg-light: #f5f5f5;
+      --bg-white: #ffffff;
+      --text-primary: #1a1a1a;
+      --text-secondary: #666666;
+      --accent: #2d2d2d;
+      --border: #e0e0e0;
     }
 
-    body::before {
-      content: '';
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* Hero Section with Image Overlay */
+    header {
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-image-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      filter: grayscale(100%) brightness(0.7);
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      color: white;
+      animation: fadeInUp 1.2s ease;
+      margin-top: 150px;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-title {
+      font-size: clamp(4rem, 10vw, 8rem);
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      text-shadow: 4px 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.2rem, 2.5vw, 2rem);
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      margin-bottom: 50px;
+      text-transform: uppercase;
+    }
+
+    .social-links {
+      position: fixed;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .social-links a {
+      color: var(--text-primary);
+      font-size: 1.3rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      transform: translateX(-5px);
+      color: var(--accent);
+    }
+
+    .resume-btn {
+      background: var(--accent);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 10px;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .resume-btn:hover {
+      background: white;
+      color: var(--accent);
+      transform: translateX(-5px) scale(1.05);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      color: white;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-10px); }
+      60% { transform: translateX(-50%) translateY(-5px); }
+    }
+
+    .scroll-indicator::after {
+      content: '↓';
+      display: block;
+      text-align: center;
+      font-size: 1.5rem;
+      margin-top: 10px;
+    }
+
+    /* Navigation */
+    nav {
       position: fixed;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: 0;
+      width: 100%;
+      padding: 30px 40px;
+      z-index: 99;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0;
+      animation: slideDown 0.8s ease 0.5s forwards;
     }
 
-    header {
-      background: linear-gradient(135deg, #3a3a3a 0%, #2d2d2d 100%);
-      color: white;
-      padding: 80px 20px 60px;
-      text-align: center;
-      position: relative;
-      box-shadow: 
-        0 10px 30px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255,255,255,0.1);
-      transform-style: preserve-3d;
-      scroll-margin-top: 0;
+    @keyframes slideDown {
+      to { opacity: 1; }
     }
 
-    header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 10px,
-        rgba(255,255,255,.02) 10px,
-        rgba(255,255,255,.02) 20px
-      );
-      pointer-events: none;
-    }
-
-    .profile-photo {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border: 5px solid #6b7280;
-      box-shadow: 
-        0 8px 30px rgba(0, 0, 0, 0.6),
-        0 0 0 10px rgba(107, 114, 128, 0.2),
-        inset 0 2px 4px rgba(255,255,255,0.2);
-      object-fit: cover;
-      margin: 0 auto 20px;
-      display: block;
-      transform: translateZ(50px);
-      transition: transform 0.3s ease;
-    }
-
-    .profile-photo:hover {
-      transform: translateZ(80px) scale(1.05);
-    }
-
-    header h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
+    .logo {
+      font-size: 1.2rem;
       font-weight: 700;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-      transform: translateZ(30px);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
-    header p {
-      font-size: 1.2em;
-      max-width: 600px;
-      margin: 0 auto 20px;
-      color: #cbd5e0;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-      transform: translateZ(20px);
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
     }
 
-    nav {
-      margin-top: 30px;
-      transform: translateZ(10px);
-    }
-
-    nav a {
-      color: white;
-      margin: 0 10px;
+    .nav-links a {
+      color: var(--text-primary);
       text-decoration: none;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
       font-weight: 500;
-      display: inline-block;
-      padding: 10px 20px;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-      background: rgba(107, 114, 128, 0.3);
-      box-shadow: 
-        0 4px 8px rgba(0,0,0,0.3),
-        inset 0 1px 0 rgba(255,255,255,0.1);
-      transform: translateZ(0);
-    }
-
-    nav a:hover {
-      background: rgba(107, 114, 128, 0.6);
-      transform: translateZ(15px) translateY(-2px);
-      box-shadow: 
-        0 8px 16px rgba(0,0,0,0.4),
-        inset 0 1px 0 rgba(255,255,255,0.2);
-    }
-
-    .section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: 40px auto;
-      background: linear-gradient(135deg, #e5e5e5 0%, #d4d4d4 100%);
-      border-radius: 12px;
-      box-shadow: 
-        0 15px 50px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255,255,255,0.5),
-        inset 0 -1px 0 rgba(0,0,0,0.2);
       position: relative;
-      transform: translateZ(0);
-      transition: transform 0.3s ease;
-      scroll-margin-top: 20px;
+      transition: color 0.3s ease;
     }
 
-    .section::before {
+    .nav-links a::after {
       content: '';
       position: absolute;
-      top: 0;
+      bottom: -5px;
       left: 0;
-      right: 0;
-      bottom: 0;
-      background: repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 50px,
-        rgba(0,0,0,.02) 50px,
-        rgba(0,0,0,.02) 51px
-      );
-      border-radius: 12px;
-      pointer-events: none;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
     }
 
-    .section:hover {
-      transform: translateZ(10px);
-    }
-
-    .section h2 {
-      color: #1a202c;
-      margin-bottom: 30px;
-      font-size: 2em;
-      text-align: center;
-      font-weight: 600;
-      text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
-    }
-
-    .btn {
-      display: inline-block;
-      background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
-      color: white;
-      padding: 12px 28px;
-      margin-top: 20px;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      font-weight: 600;
-      box-shadow: 
-        0 6px 20px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255,255,255,0.2),
-        inset 0 -2px 0 rgba(0,0,0,0.2);
-      transform: translateZ(0);
-    }
-
-    .btn:hover {
-      transform: translateZ(20px) translateY(-3px);
-      box-shadow: 
-        0 10px 30px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255,255,255,0.3);
-    }
-
-    .project {
-      margin-bottom: 60px;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 
-        0 8px 25px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255,255,255,0.3),
-        inset 0 -1px 0 rgba(0,0,0,0.1);
-      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-      border-left: 5px solid #6b7280;
-      position: relative;
-      transform: translateZ(0);
-      transition: transform 0.3s ease;
-    }
-
-    .project::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 15px,
-        rgba(0,0,0,.01) 15px,
-        rgba(0,0,0,.01) 30px
-      );
-      border-radius: 12px;
-      pointer-events: none;
-    }
-
-    .project:hover {
-      transform: translateZ(15px) translateY(-5px);
-      box-shadow: 
-        0 15px 40px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255,255,255,0.4);
-    }
-
-    .project h3 {
-      margin-bottom: 10px;
-      color: #1a202c;
-      font-size: 1.5em;
-      font-weight: 600;
-      text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
-    }
-
-    .project p {
-      margin: 10px 0 15px;
-      font-size: 1.1em;
-      color: #4a5568;
-    }
-
-    .project a {
-      color: #374151;
-      text-decoration: none;
-      margin-right: 20px;
-      padding: 10px 20px;
-      border: 2px solid #6b7280;
-      border-radius: 6px;
-      display: inline-block;
-      margin-top: 10px;
-      transition: all 0.3s ease;
-      font-weight: 500;
-      background: rgba(107, 114, 128, 0.1);
-      box-shadow: 
-        0 2px 8px rgba(0,0,0,0.2),
-        inset 0 1px 0 rgba(255,255,255,0.3);
-      transform: translateZ(0);
-    }
-
-    .project a:hover {
-      background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
-      color: white;
-      transform: translateZ(10px) translateY(-2px);
-      box-shadow: 
-        0 6px 15px rgba(0,0,0,0.3),
-        inset 0 1px 0 rgba(255,255,255,0.3);
-    }
-
-    .project img {
-      margin-top: 20px;
-      max-width: 100%;
+    .nav-links a:hover::after {
       width: 100%;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 
-        0 10px 35px rgba(0, 0, 0, 0.4),
-        0 0 0 1px rgba(0,0,0,0.1);
-      display: block;
-      transition: transform 0.3s ease;
     }
 
-    .project img:hover {
-      transform: scale(1.02) translateZ(10px);
+    section {
+      padding: 120px 0;
+      background: var(--bg-white);
+      margin-bottom: 2px;
     }
 
-    .skills-list {
-      list-style-type: none;
-      padding: 0;
-      line-height: 2;
+    .section-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 80px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
-    .skills-list li {
-      margin-bottom: 15px;
-      padding: 18px;
-      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-      border-radius: 8px;
-      border-left: 4px solid #6b7280;
-      font-size: 1.1em;
-      color: #2d3748;
-      box-shadow: 
-        0 4px 12px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255,255,255,0.3);
-      transform: translateZ(0);
-      transition: transform 0.3s ease;
-    }
-
-    .skills-list li:hover {
-      transform: translateZ(10px) translateX(5px);
-      box-shadow: 
-        0 8px 20px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255,255,255,0.4);
-    }
-
-    .contact-form {
-      max-width: 600px;
+    /* About Section */
+    .about-content {
+      max-width: 900px;
       margin: 0 auto;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 15px;
-      margin-bottom: 20px;
-      border: 2px solid #9ca3af;
-      border-radius: 8px;
-      font-size: 1em;
-      font-family: inherit;
-      transition: all 0.3s ease;
-      background: rgba(255,255,255,0.9);
-      box-shadow: 
-        inset 0 2px 4px rgba(0,0,0,0.1),
-        0 1px 0 rgba(255,255,255,0.5);
-    }
-
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      border-color: #6b7280;
-      outline: none;
-      box-shadow: 
-        0 0 0 3px rgba(107, 114, 128, 0.2),
-        inset 0 2px 4px rgba(0,0,0,0.1);
-      transform: translateZ(5px);
-    }
-
-    .contact-form button {
-      background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
-      color: white;
-      padding: 15px 35px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1.1em;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 
-        0 6px 20px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255,255,255,0.2);
-      transform: translateZ(0);
-    }
-
-    .contact-form button:hover {
-      transform: translateZ(15px) translateY(-3px);
-      box-shadow: 
-        0 10px 30px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255,255,255,0.3);
-    }
-
-    .contact-links {
       text-align: center;
-      margin-top: 30px;
     }
 
-    .contact-links a {
-      color: #374151;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: 600;
-      padding: 10px 20px;
-      border-radius: 6px;
+    .about-text {
+      font-size: 1.3rem;
+      line-height: 1.9;
+      color: var(--text-secondary);
+      margin-bottom: 60px;
+      font-weight: 300;
+    }
+
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 50px;
+    }
+
+    .interest-tag {
+      background: var(--bg-light);
+      padding: 20px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
       transition: all 0.3s ease;
-      display: inline-block;
-      background: rgba(107, 114, 128, 0.2);
-      box-shadow: 
-        0 2px 8px rgba(0,0,0,0.2),
-        inset 0 1px 0 rgba(255,255,255,0.3);
-      transform: translateZ(0);
     }
 
-    .contact-links a:hover {
-      background: rgba(107, 114, 128, 0.4);
-      transform: translateZ(10px) translateY(-2px);
-      box-shadow: 
-        0 6px 15px rgba(0,0,0,0.3),
-        inset 0 1px 0 rgba(255,255,255,0.4);
+    .interest-tag:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-5px);
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      margin-top: 60px;
+    }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+    }
+
+    .project-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: all 0.5s ease;
+    }
+
+    .project-card:hover .project-image {
+      filter: grayscale(0%);
+      transform: scale(1.05);
+    }
+
+    .project-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+
+    .project-overlay h3 {
+      color: white;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .project-overlay p {
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .project-links a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 25px;
+      border: 1px solid white;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      transition: all 0.3s ease;
+    }
+
+    .project-links a:hover {
+      background: white;
+      color: var(--accent);
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--border);
+    }
+
+    .skill-card {
+      background: var(--bg-white);
+      padding: 40px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .skill-card:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .skill-card strong {
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    .skill-card:hover strong {
+      color: white;
+    }
+
+    .skill-card p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .skill-card:hover p {
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* Contact Section */
+    .contact-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin-top: 60px;
+      flex-wrap: wrap;
+    }
+
+    .contact-item {
+      text-align: center;
+    }
+
+    .contact-item h3 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 15px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .contact-item a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    .contact-item a:hover {
+      color: var(--accent);
     }
 
     footer {
-      background: linear-gradient(135deg, #3a3a3a 0%, #2d2d2d 100%);
+      padding: 60px 40px;
       text-align: center;
-      padding: 50px 20px;
-      margin-top: 60px;
-      font-size: 1em;
-      color: #cbd5e0;
-      box-shadow: 
-        0 -10px 30px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255,255,255,0.1);
-      position: relative;
+      background: var(--accent);
+      color: white;
     }
 
-    footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 10px,
-        rgba(255,255,255,.02) 10px,
-        rgba(255,255,255,.02) 20px
-      );
-      pointer-events: none;
+    footer p {
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+      font-size: 1rem;
     }
 
-    footer h3 {
-      color: #9ca3af;
-      margin-bottom: 20px;
-      font-size: 1.5em;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    }
-
-    @media screen and (max-width: 480px) {
-      body {
-        overflow-x: hidden;
+    @media (max-width: 968px) {
+      .social-links {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 30px;
       }
 
-      header {
-        padding: 40px 15px 30px;
+      .projects-grid {
+        grid-template-columns: 1fr;
       }
 
-      .profile-photo {
-        width: 100px;
-        height: 100px;
-        border: 4px solid #6b7280;
-        margin-bottom: 15px;
+      .skills-grid {
+        grid-template-columns: 1fr;
       }
 
-      header h1 {
-        font-size: 1.8em;
-        margin-bottom: 8px;
-      }
-
-      header p {
-        font-size: 0.95em;
-        padding: 0 10px;
-        line-height: 1.5;
+      .nav-links {
+        display: none;
       }
 
       nav {
-        margin-top: 20px;
+        justify-content: center;
       }
 
-      nav a {
-        display: block;
-        margin: 8px auto;
-        padding: 14px 20px;
-        max-width: 280px;
-        text-align: center;
-      }
-
-      .btn {
-        display: block;
-        margin: 15px auto;
-        max-width: 280px;
-        text-align: center;
-      }
-
-      .section {
-        padding: 30px 15px;
-        margin: 20px 10px;
-        border-radius: 8px;
-      }
-
-      .section h2 {
-        font-size: 1.6em;
-        margin-bottom: 20px;
-      }
-
-      .project {
-        margin-bottom: 30px;
-        padding: 15px;
-      }
-
-      .project h3 {
-        font-size: 1.3em;
-      }
-
-      .project p {
-        font-size: 1em;
-      }
-
-      .project a {
-        display: block;
-        text-align: center;
-        margin: 10px auto;
-        max-width: 100%;
-      }
-
-      .skills-list li {
-        font-size: 0.95em;
-        padding: 12px;
-        margin-bottom: 10px;
-      }
-
-      .contact-form {
-        padding: 0 5px;
-      }
-
-      .contact-form input,
-      .contact-form textarea {
-        padding: 14px;
-        font-size: 16px;
-        -webkit-appearance: none;
-        appearance: none;
-      }
-
-      .contact-form button {
-        width: 100%;
-        padding: 16px;
-      }
-
-      .contact-links a {
-        display: block;
-        margin: 12px auto;
-        padding: 14px;
-        max-width: 280px;
-        text-align: center;
-      }
-
-      footer {
-        padding: 30px 15px;
-      }
-
-      footer h3 {
-        font-size: 1.3em;
-      }
-
-      footer p {
-        font-size: 0.95em;
-        padding: 0 10px;
+      .hero-content {
+        margin-top: 80px;
       }
     }
 
-    @media screen and (min-width: 481px) and (max-width: 768px) {
-      .profile-photo {
-        width: 130px;
-        height: 130px;
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 20px;
       }
 
-      header h1 {
-        font-size: 2.2em;
+      section {
+        padding: 80px 0;
       }
 
-      nav a {
-        margin: 5px 8px;
-        padding: 10px 15px;
+      .hero-title {
+        font-size: 3rem;
       }
 
-      .section {
-        padding: 50px 25px;
-      }
-
-      .project {
-        padding: 20px;
-      }
-    }
-
-    @media screen and (min-width: 1200px) {
-      .section {
-        max-width: 1200px;
-      }
-
-      .profile-photo {
-        width: 170px;
-        height: 170px;
-      }
-
-      header h1 {
-        font-size: 3em;
-      }
-
-      .project {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+      .contact-info {
+        flex-direction: column;
         gap: 30px;
-        align-items: start;
       }
 
-      .project img {
-        margin-top: 0;
+      .hero-content {
+        margin-top: 60px;
       }
     }
   </style>
 </head>
 <body>
 
+<nav>
+  <div class="logo">SMK</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="social-links">
+  <a href="https://www.linkedin.com/in/kaifshaikMD" target="_blank" title="LinkedIn">in</a>
+  <a href="https://github.com/KaifCodeur" target="_blank" title="GitHub">gh</a>
+  <a href="mailto:personal.kaif7@gmail.com" title="Email">@</a>
+  <a href="resume/Shaik_Mohammed_Kaif_Resume.pdf" target="_blank" class="resume-btn" title="Download Resume">CV</a>
+</div>
+
 <header>
-  <img src="images/SHAIKMOHAMMEDKAIF.jpg" alt="Shaik Mohammed Kaif" class="profile-photo" />
-  <h1>Shaik Mohammed Kaif</h1>
-  <p>AI/ML Enthusiast | Full Stack Developer | Problem Solver</p>
-  <nav>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
-    <a href="Shaik Mohammed Kaif.pdf" class="btn" download>Download Resume</a>
-  </nav>
+  <div class="hero-image-container">
+    <img src="images/Untitled.png" alt="Shaik Mohammed Kaif" class="hero-image" />
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <h1 class="hero-title">DEVELOPER</h1>
+    <p class="hero-subtitle">AI/ML Engineer • Full Stack • Problem Solver</p>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
 </header>
 
-<section class="section" id="about">
-  <h2>About Me</h2>
-  <p>
-    I'm a recent graduate with a strong focus in Artificial Intelligence, Machine Learning,
-    and Full Stack Development. As a quick learner and self-driven problem solver, I believe in
-    building projects that matter and refining them with precision and speed.
-  </p>
-</section>
-
-<section class="section" id="projects">
-  <h2>Projects</h2>
-
-  <div class="project">
-    <div>
-      <h3>Cryptocurrency Market Prediction App</h3>
-      <p>Deep learning-based crypto prediction using RNN, LSTM, and sentiment analysis.</p>
-      <a href="https://cryptocurrency-prediction-1777.streamlit.app/" target="_blank">Live Demo</a>
-      <a href="https://github.com/KaifCodeur" target="_blank">GitHub</a>
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">About</h2>
+    <div class="about-content">
+      <p class="about-text">
+        Motivated B.Tech (CSE – AI/ML) graduate with hands-on experience in Python, full-stack web development, 
+        and applied machine learning. Seeking opportunities to contribute to the development of intelligent 
+        software solutions, scalable architectures, and AI-driven applications.
+      </p>
+      
+      <div class="interests-grid">
+        <div class="interest-tag">AI & Machine Learning</div>
+        <div class="interest-tag">Full Stack Development</div>
+        <div class="interest-tag">Data Science</div>
+        <div class="interest-tag">Cloud Systems</div>
+      </div>
     </div>
-    <img src="images/crypto-prediction.png" alt="Crypto Prediction Screenshot" />
-  </div>
-
-  <div class="project">
-    <div>
-      <h3>Online Shopping Mart</h3>
-      <p>Responsive e-commerce website built using React, JavaScript, HTML/CSS.</p>
-      <a href="https://kaifcodeur.github.io/frontend-project/" target="_blank">Live Demo</a>
-      <a href="https://github.com/KaifCodeur" target="_blank">GitHub</a>
-    </div>
-    <img src="images/shopping-mart.png" alt="Shopping Mart Screenshot" />
-  </div>
-
-  <div class="project">
-    <div>
-      <h3>Gesture-Controlled Presentation Tool</h3>
-      <p>Hand gesture-based slide navigation using OpenCV and Python.</p>
-      <a href="https://github.com/KaifCodeur/IMPLEMENTATION-OF-GESTURE-CONTROL-IN-POWER-POINT-PRESENTATION" target="_blank">GitHub</a>
-    </div>
-    <img src="images/gesture-presentation.png" alt="Gesture Tool Screenshot" />
-  </div>
-
-  <div class="project">
-    <div>
-      <h3>Unified Government Schemes Portal</h3>
-      <p>Centralized portal for accessing Indian government schemes.</p>
-      <a href="https://kaifcodeur.github.io/KaifCodeur-ONLINE-PORTAL-FOR-ACCESSING-STATE-AND-CENTRAL-GOVERNMENT-SCHEMES/" target="_blank">GitHub</a>
-    </div>
-    <img src="images/govt-portal.png" alt="Government Portal Screenshot" />
   </div>
 </section>
 
-<section class="section" id="skills">
-  <h2>Skills & Technologies</h2>
-  <ul class="skills-list">
-    <li><strong>Languages:</strong> Python, JavaScript, SQL</li>
-    <li><strong>Web Development:</strong> HTML, CSS, React JS, Django</li>
-    <li><strong>AI/ML & Data Science:</strong> Linear Regression, Decision Trees, SVM, RNN, LSTM, TensorFlow, Keras, Scikit-learn, OpenCV</li>
-    <li><strong>Visualization:</strong> Pandas, NumPy, Power BI, Tableau</li>
-    <li><strong>Tools & Platforms:</strong> Git, GitHub, Streamlit</li>
-    <li><strong>Languages Spoken:</strong> English, Hindi, Telugu</li>
-  </ul>
+<section id="projects">
+  <div class="container">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+      
+      <div class="project-card">
+        <img src="images/crypto-prediction.png" alt="Crypto Prediction" class="project-image" />
+        <div class="project-overlay">
+          <h3>Crypto Prediction</h3>
+          <p>Deep learning system using LSTM and RNN for cryptocurrency price prediction with market sentiment analysis.</p>
+          <div class="project-links">
+            <a href="https://cryptocurrency-prediction-1777.streamlit.app/" target="_blank">Live</a>
+            <a href="https://github.com/KaifCodeur" target="_blank">Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="images/shopping-mart.png" alt="Shopping Mart" class="project-image" />
+        <div class="project-overlay">
+          <h3>Shopping Mart</h3>
+          <p>Responsive e-commerce platform with React JS, Django, secure authentication, and order tracking.</p>
+          <div class="project-links">
+            <a href="https://kaifcodeur.github.io/frontend-project/" target="_blank">Live</a>
+            <a href="https://github.com/KaifCodeur" target="_blank">Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="images/gesture-presentation.png" alt="Gesture Control" class="project-image" />
+        <div class="project-overlay">
+          <h3>Gesture Control</h3>
+          <p>Touch-free presentation system using Python and OpenCV for intuitive slide navigation.</p>
+          <div class="project-links">
+            <a href="https://github.com/KaifCodeur/IMPLEMENTATION-OF-GESTURE-CONTROL-IN-POWER-POINT-PRESENTATION" target="_blank">Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="images/govt-portal.png" alt="Government Portal" class="project-image" />
+        <div class="project-overlay">
+          <h3>Government Portal</h3>
+          <p>Consolidated web portal for government schemes with advanced search and navigation.</p>
+          <div class="project-links">
+            <a href="https://kaifcodeur.github.io/KaifCodeur-ONLINE-PORTAL-FOR-ACCESSING-STATE-AND-CENTRAL-GOVERNMENT-SCHEMES/" target="_blank">View</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<section class="section" id="contact">
-  <h2>Contact</h2>
-  <form class="contact-form" action="https://formspree.io/f/xdkdlezn" method="POST">
-    <input type="hidden" name="_redirect" value="thank-you.html">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required />
+<section id="skills">
+  <div class="container">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <strong>Programming</strong>
+        <p>Python, Java, JavaScript, SQL</p>
+      </div>
+      <div class="skill-card">
+        <strong>Web Development</strong>
+        <p>HTML, CSS, React JS, Django</p>
+      </div>
+      <div class="skill-card">
+        <strong>Machine Learning</strong>
+        <p>TensorFlow, Keras, Scikit-learn, RNN, LSTM</p>
+      </div>
+      <div class="skill-card">
+        <strong>Data Analysis</strong>
+        <p>Pandas, NumPy, Power BI, Tableau</p>
+      </div>
+      <div class="skill-card">
+        <strong>Tools & Frameworks</strong>
+        <p>Git, VS Code, OpenCV, Docker</p>
+      </div>
+      <div class="skill-card">
+        <strong>Cloud & DevOps</strong>
+        <p>AWS, CI/CD, API Development</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required />
-
-    <label for="message">Message:</label>
-    <textarea id="message" name="message" rows="5" required></textarea>
-
-    <button type="submit">Send Message</button>
-  </form>
-
-  <div class="contact-links">
-    <a href="mailto:personal.kaif7@gmail.com">Email</a>
-    <a href="https://www.linkedin.com/in/kaifshaikMD" target="_blank">LinkedIn</a>
-    <a href="https://github.com/KaifCodeur" target="_blank">GitHub</a>
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title">Let's Work Together</h2>
+    <div class="contact-container">
+      <p class="about-text">
+        Interested in collaborating or discussing opportunities? Feel free to reach out through any of these channels.
+      </p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <h3>Email</h3>
+          <a href="mailto:personal.kaif7@gmail.com">personal.kaif7@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <h3>LinkedIn</h3>
+          <a href="https://www.linkedin.com/in/kaifshaikMD" target="_blank">kaifshaikMD</a>
+        </div>
+        <div class="contact-item">
+          <h3>GitHub</h3>
+          <a href="https://github.com/KaifCodeur" target="_blank">KaifCodeur</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <footer>
-  <h3>Hobbies & Interests</h3>
-  <p>
-    Enjoy creative pursuits like video editing and storytelling through anime.
-    Passionate about fitness and personal discipline through regular home workouts.
-    Curious about new technologies and continuously experimenting with UI, tools, and design. 😊
-  </p>
+  <div class="container">
+    <p>
+      © 2025 Shaik Mohammed Kaif. Creative video editing enthusiast and anime storyteller. 
+      Passionate about fitness and continuously experimenting with emerging technologies.
+    </p>
+  </div>
 </footer>
 
 </body>
